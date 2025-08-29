@@ -11,7 +11,9 @@
   },
   "runArgs": [
     "--cap-add=NET_ADMIN",
-    "--cap-add=NET_RAW"
+    "--cap-add=NET_RAW",
+    "--ulimit=nofile=16384:16384",
+    "--shm-size=1g"
   ],
   "customizations": {
     "vscode": {
