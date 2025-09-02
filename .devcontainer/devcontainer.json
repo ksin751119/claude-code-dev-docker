@@ -49,9 +49,11 @@
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096",
     "CLAUDE_CONFIG_DIR": "/home/node/.claude",
-    "POWERLEVEL9K_DISABLE_GITSTATUS": "true"
+    "POWERLEVEL9K_DISABLE_GITSTATUS": "true",
+    "CLAUDE_TG_BOT_TOKEN": "${localEnv:CLAUDE_TG_BOT_TOKEN}",
+    "CLAUDE_TG_CHAT_ID": "${localEnv:CLAUDE_TG_CHAT_ID}"
   },
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
   "workspaceFolder": "/workspace",
-  "postCreateCommand": "echo 'Container ready for development'"
+  "postCreateCommand": "cp -r /workspace/.devcontainer/.claude/* /home/node/.claude/ && chmod -R 755 /home/node/.claude && chmod +x /home/node/.claude/hooks/telegram-notify.sh && echo 'Container ready for development with Claude hooks configured'"
 }
