@@ -10,10 +10,10 @@
     }
   },
   "runArgs": [
-    "--cap-add=NET_ADMIN",
-    "--cap-add=NET_RAW",
-    "--ulimit=nofile=16384:16384",
-    "--shm-size=1g"
+    "--ulimit=nofile=65536:65536",
+    "--shm-size=4g",
+    "--dns=8.8.8.8",
+    "--dns=1.1.1.1"
   ],
   "customizations": {
     "vscode": {
@@ -47,7 +47,8 @@
     "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume"
   ],
   "containerEnv": {
-    "NODE_OPTIONS": "--max-old-space-size=4096",
+    "NODE_OPTIONS": "--max-old-space-size=8192 --max-semi-space-size=128",
+    "UV_THREADPOOL_SIZE": "128",
     "CLAUDE_CONFIG_DIR": "/home/node/.claude",
     "POWERLEVEL9K_DISABLE_GITSTATUS": "true",
     "CLAUDE_TG_BOT_TOKEN": "${localEnv:CLAUDE_TG_BOT_TOKEN}",
